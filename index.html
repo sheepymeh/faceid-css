@@ -1,0 +1,244 @@
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<style>
+		*, *::before, *::after {
+			box-sizing: border-box;
+		}
+		body {
+			font-family: system-ui, -apple-system, BlinkMacSystemFont, Inter, sans-serif;
+			color: #fff;
+		}
+
+		#face-id {
+			position: relative;
+			width: 140px;
+			height: 140px;
+			padding: 20px 30px;
+			border-radius: 20px;
+			transform-origin: center;
+			animation: faceIdFadeIn .3s ease-in, faceIdFadeIn .3s 1.3s ease-out reverse both;
+			backdrop-filter: saturate(180%) blur(20px);
+			background-color: #ccc;
+			text-align: center;
+		}
+		#face-id::after {
+			content: "Face ID";
+			font-weight: bold;
+			position: absolute;
+			top: 110px;
+			left: 0;
+			width: 100%;
+		}
+		@keyframes faceIdFadeIn {
+			from {
+				transform: scale(.8);
+				opacity: 0;
+			}
+			10% {
+				transform: scale(.8);
+			}
+		}
+		#face-id-parent {
+			overflow: visible;
+			position: absolute;
+			stroke-linecap: round;
+			stroke-linejoin: round;
+			stroke-width: 4px;
+			stroke: #fff;
+			fill: none;
+			display: block;
+		}
+		#face-id-face {
+			animation: faceIdFaceFadeOut .2s .3s ease-in forwards;
+		}
+		@keyframes faceIdFaceFadeOut {
+			to { opacity: 0; }
+		}
+
+		@supports (-moz-appearance: none) {
+			#face-id-corner {
+				animation: faceIdCornerExtend .5s .3s ease-in forwards, faceIdCornerBlur .5s .3s ease-in forwards;
+			}
+		}
+		@keyframes faceIdCornerExtend {
+			70% {
+				opacity: 1;
+				filter: blur(3px);
+			}
+			to {
+				d: path("M8,30 L8,30 Q8,8 30,8 L38,8");
+				stroke-width: 6px;
+				filter: blur(3px);
+				opacity: 0;
+			}
+		}
+
+		#face-id-tick {
+			animation: faceIdTick .5s 1s ease-out forwards;
+		}
+		@keyframes faceIdTick {
+			to { stroke-dashoffset: 0; }
+		}
+
+		#face-id-circles, #face-id-circles div {
+			width: 70px;
+			height: 70px;
+			border-radius: 40px;
+			position: absolute;
+		}
+		#face-id-circles {
+			top: 25px;
+			left: 35px;
+			perspective: 200px;
+			transform-style: preserve-3d;
+			transform-origin: 50%;
+		}
+		#face-id-circles div {
+			border: 4px solid transparent;
+			transform: translate3d(0, 0, 0);
+		}
+		#face-id-circle-one-1, #face-id-circle-one-2, #face-id-circle-two-1, #face-id-circle-two-2 {
+			display: block;
+			width: 65px;
+			height: 65px;
+			opacity: .7;
+		}
+		#face-id-circle-one {
+			animation: faceIdColorOne 1s .3s linear forwards, faceIdMovementOne 1s .3s ease-out forwards;
+		}
+		#face-id-circle-one-1 {
+			animation: faceIdColorOne 1s .375s linear forwards, faceIdMovementOne 1s .375s ease-out forwards, faceIdPseudo 1s .375s linear forwards;
+		}
+		#face-id-circle-one-2 {
+			animation: faceIdColorOne 1s .45s linear forwards, faceIdMovementOne 1s .45s ease-out forwards, faceIdPseudo 1s .45s linear forwards;
+		}
+		@keyframes faceIdColorOne {
+			20% {
+				border-color: #1260cc;
+			}
+			50% {
+				border-color: #29c5f6;
+			}
+			80% {
+				border-color: #1260cc;
+			}
+			100% {
+				border-color: #fff;
+			}
+		}
+		@keyframes faceIdMovementOne {
+			0% {
+				transform: rotate3d(0, 0, 0);
+			}
+			25% {
+				transform: translateZ(-30px) rotate3d(1, -.7, 0, -160deg);
+				animation-timing-function: ease-in;
+			}
+			40% {
+				transform: translateZ(-25px) rotate3d(.2, .8, -.2, 100deg);
+				animation-timing-function: linear;
+			}
+			60% {
+				transform: translateZ(-10px) translateX(-8px) rotate3d(-.4, .6, 0, 100deg);
+				animation-timing-function: ease-out;
+			}
+			100% {
+				transform: rotate3d(0, 0, 0, 0);
+			}
+		}
+		@keyframes faceIdPseudo {
+			20% {
+				filter: blur(3px);
+			}
+			50% {
+				filter: blur(3px);
+			}
+			70% {
+				filter: blur(0);
+				opacity: .7;
+			}
+			80% {
+				opacity: 0;
+			}
+		}
+
+		#face-id-circle-two {
+			animation: faceIdColorTwo 1s .3s linear forwards, faceIdMovementTwo 1s .3s ease-out forwards;
+		}
+		#face-id-circle-two-1 {
+			animation: faceIdColorTwo 1s .375s linear forwards, faceIdMovementTwo 1s .375s ease-out forwards, faceIdPseudo 1s .375s linear forwards;
+		}
+		#face-id-circle-two-2 {
+			animation: faceIdColorTwo 1s .45s linear forwards, faceIdMovementTwo 1s .45s ease-out forwards, faceIdPseudo 1s .45s linear forwards;
+		}
+		@keyframes faceIdColorTwo {
+			20% {
+				border-color: #1260cc;
+			}
+			50% {
+				border-color: #29c5f6;
+			}
+			80% {
+				border-color: #1260cc;
+			}
+			100% {
+				border-color: #fff;
+			}
+		}
+		@keyframes faceIdMovementTwo {
+			0% {
+				transform: rotate3d(1, 0, 0, 100deg);
+			}
+			25% {
+				transform: translateZ(-30px) rotate3d(1, -.7, 0, -160deg);
+			}
+			40% {
+				transform: rotate3d(1, 0, 0, -180deg);
+			}
+			100% {
+				transform: rotate3d(1, 0, -999, -180deg);
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div id="face-id">
+		<svg id="face-id-parent" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="80" height="80" fill="#000">
+			<defs>
+				<filter id="face-id-blur-start">
+					<feGaussianBlur stdDeviation="0" />
+				</filter>
+				<filter id="face-id-blur">
+					<feGaussianBlur stdDeviation="4" />
+				</filter>
+				<path id="face-id-corner" d="M2,22.5 L2,14 Q2,2 14,2 L22.5,2" />
+				<path id="face-id-eye" d="M0,0 L0,6" />
+			</defs>
+			<g id="face-id-corners">
+				<use xlink:href="#face-id-corner"/>
+				<use xlink:href="#face-id-corner" transform="matrix(0 1 -1 0 80 0)"/>
+				<use xlink:href="#face-id-corner" transform="matrix(0 -1 1 0 0 80)"/>
+				<use xlink:href="#face-id-corner" transform="matrix(-1 0 0 -1 80 80)"/>
+				<animate xlink:href="#face-id-corner" attributeName="d" attributeType="XML" from="M2,22.5 L2,14 Q2,2 14,2 L22.5,2" to="M8,30 L8,30 Q8,8 30,8 L38,8" begin=".3s" dur=".5s" repeatCount="once" fill="freeze" />
+				<animate xlink:href="#face-id-corner" attributeName="stroke-width" attributeType="XML" from="4" to="6" begin=".3s" dur=".5s" repeatCount="once" fill="freeze" />
+				<animate xlink:href="#face-id-corner" attributeName="opacity" attributeType="XML" from="1" to="0" begin=".3s" dur=".5s" repeatCount="once" fill="freeze" />
+			</g>
+			<g id="face-id-face">
+				<use xlink:href="#face-id-eye" transform="translate(23.5 30)"/>
+				<use xlink:href="#face-id-eye" transform="translate(56.5 30)"/>
+				<path d="M42,30 L42,45 Q42,48.5 38.5,48.5 L37,48.5"/>
+				<circle cx=40 cy=43.5 r=19 stroke-dashoffset="-16" stroke-dasharray="28 90"></circle>
+			</g>
+			<path id="face-id-tick" d="M25,45 l10,10 l20,-25" stroke-dashoffset="50" stroke-dasharray="50"></path>
+		</svg>
+		<div id="face-id-circles">
+			<div id="face-id-circle-one"></div>
+			<div id="face-id-circle-one-1"></div>
+			<div id="face-id-circle-one-2"></div>
+			<div id="face-id-circle-two"></div>
+			<div id="face-id-circle-two-1"></div>
+			<div id="face-id-circle-two-2"></div>
+		</div>
+	</div>
+</body>
